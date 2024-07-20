@@ -25,7 +25,7 @@
 #if !TARGET_OS_EXCLAVEKIT
   #include <_simple.h>
   #include <stdint.h>
-  #include <dyld/VersionMap.h>
+//  #include <dyld/VersionMap.h>
   #include <mach/mach_time.h> // mach_absolute_time()
   #include <mach-o/dyld_priv.h>
   #include <sys/syscall.h>
@@ -35,12 +35,12 @@
     #include <sys/uio.h>
     #include <sys/un.h>
     #include <sys/mman.h>
-    #include <System/sys/csr.h>
-    #include <System/sys/reason.h>
+    #include <sys/csr.h>
+    #include <sys/reason.h>
     #include <kern/kcdata.h>
     //FIXME: Hack to avoid <sys/commpage.h> being included by <System/machine/cpu_capabilities.h>
-    #include <System/sys/commpage.h>
-    #include <System/machine/cpu_capabilities.h>
+    #include <sys/commpage.h>
+    #include <machine/cpu_capabilities.h>
     #if !TARGET_OS_DRIVERKIT
         #include <vproc_priv.h>
     #endif
@@ -600,19 +600,19 @@ uint32_t ProcessConfig::Process::findVersionSetEquivalent(dyld3::Platform versio
     uint32_t candidateVersion = 0;
     uint32_t candidateVersionEquivalent = 0;
     uint32_t newVersionSetVersion = 0;
-    for (const auto& i : dyld3::sVersionMap) {
-        switch (MachOFile::basePlatform(versionPlatform)) {
-            case dyld3::Platform::macOS:    newVersionSetVersion = i.macos; break;
-            case dyld3::Platform::iOS:      newVersionSetVersion = i.ios; break;
-            case dyld3::Platform::watchOS:  newVersionSetVersion = i.watchos; break;
-            case dyld3::Platform::tvOS:     newVersionSetVersion = i.tvos; break;
-            case dyld3::Platform::bridgeOS: newVersionSetVersion = i.bridgeos; break;
-            default: newVersionSetVersion = 0xffffffff; // If we do not know about the platform it is newer than everything
-        }
-        if (newVersionSetVersion > version) { break; }
-        candidateVersion = newVersionSetVersion;
-        candidateVersionEquivalent = i.set;
-    }
+//    for (const auto& i : dyld3::sVersionMap) {
+//        switch (MachOFile::basePlatform(versionPlatform)) {
+//            case dyld3::Platform::macOS:    newVersionSetVersion = i.macos; break;
+//            case dyld3::Platform::iOS:      newVersionSetVersion = i.ios; break;
+//            case dyld3::Platform::watchOS:  newVersionSetVersion = i.watchos; break;
+//            case dyld3::Platform::tvOS:     newVersionSetVersion = i.tvos; break;
+//            case dyld3::Platform::bridgeOS: newVersionSetVersion = i.bridgeos; break;
+//            default: newVersionSetVersion = 0xffffffff; // If we do not know about the platform it is newer than everything
+//        }
+//        if (newVersionSetVersion > version) { break; }
+//        candidateVersion = newVersionSetVersion;
+//        candidateVersionEquivalent = i.set;
+//    }
 
     if (newVersionSetVersion == 0xffffffff && candidateVersion == 0) {
         candidateVersionEquivalent = newVersionSetVersion;
@@ -665,18 +665,18 @@ Platform ProcessConfig::Process::getMainPlatform()
                     result = dyld3::Platform::iOS;
                 }
 
-                for (const dyld3::VersionSetEntry& entry : dyld3::sVersionMap) {
-                    if ( entry.macos == this->mainExecutableSDKVersion ) {
-                        this->mainExecutableSDKVersion = entry.ios;
-                        break;
-                    }
-                }
-                for (const dyld3::VersionSetEntry& entry : dyld3::sVersionMap) {
-                    if ( entry.macos == this->mainExecutableMinOSVersion ) {
-                        this->mainExecutableMinOSVersion = entry.ios;
-                        break;
-                    }
-                }
+//                for (const dyld3::VersionSetEntry& entry : dyld3::sVersionMap) {
+//                    if ( entry.macos == this->mainExecutableSDKVersion ) {
+//                        this->mainExecutableSDKVersion = entry.ios;
+//                        break;
+//                    }
+//                }
+//                for (const dyld3::VersionSetEntry& entry : dyld3::sVersionMap) {
+//                    if ( entry.macos == this->mainExecutableMinOSVersion ) {
+//                        this->mainExecutableMinOSVersion = entry.ios;
+//                        break;
+//                    }
+//                }
             }
         }
     }

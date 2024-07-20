@@ -43,7 +43,7 @@
   #include <sys/errno.h>
   #include <malloc/malloc.h>
   #include <libc_private.h>
-  #include <dyld/VersionMap.h>
+//  #include <dyld/VersionMap.h>
 
   #include "dyld_process_info_internal.h"
   #include "OptimizerObjC.h"
@@ -448,7 +448,10 @@ uint32_t APIs::getSdkVersion(const mach_header* mh)
                     return;
             }
         }
-        else if ( platform == PLATFORM_IOSSIMULATOR && (dyld_platform_t)config.process.platform == PLATFORM_IOSMAC ) {
+        else if ( platform == PLATFORM_IOSSIMULATOR
+                 // TRIPLECC TODO
+//                 && (dyld_platform_t)config.process.platform == PLATFORM_IOSMAC
+                 ) {
             //FIXME bringup hack
             versionFound = true;
             retval       = 0x000C0000;
@@ -496,7 +499,9 @@ uint32_t APIs::dyld_get_min_os_version(const mach_header* mh)
                     return;
             }
         }
-        else if ( platform == PLATFORM_IOSSIMULATOR && (dyld_platform_t)config.process.platform == PLATFORM_IOSMAC ) {
+        else if ( platform == PLATFORM_IOSSIMULATOR
+//                 && (dyld_platform_t)config.process.platform == PLATFORM_IOSMAC
+                 ) {
             //FIXME bringup hack
             versionFound = true;
             retval       = 0x000C0000;
@@ -538,30 +543,30 @@ dyld_build_version_t APIs::mapFromVersionSet(dyld_build_version_t versionSet)
 #else
     if ( versionSet.platform != 0xffffffff )
         return versionSet;
-    const dyld3::VersionSetEntry* foundEntry = nullptr;
-    for (const dyld3::VersionSetEntry& entry : dyld3::sVersionMap) {
-        if ( entry.set >= versionSet.version ) {
-            foundEntry = &entry;
-            break;
-        }
-    }
-    if ( foundEntry == nullptr ) {
+//    const dyld3::VersionSetEntry* foundEntry = nullptr;
+//    for (const dyld3::VersionSetEntry& entry : dyld3::sVersionMap) {
+//        if ( entry.set >= versionSet.version ) {
+//            foundEntry = &entry;
+//            break;
+//        }
+//    }
+//    if ( foundEntry == nullptr ) {
         return { .platform = 0, .version = 0 };
-    }
-    switch ( MachOFile::basePlatform(config.process.platform) ) {
-        case dyld3::Platform::macOS:
-            return { .platform = PLATFORM_MACOS,    .version = foundEntry->macos };
-        case dyld3::Platform::iOS:
-            return { .platform = PLATFORM_IOS,      .version = foundEntry->ios };
-        case dyld3::Platform::watchOS:
-            return { .platform = PLATFORM_WATCHOS,  .version = foundEntry->watchos };
-        case dyld3::Platform::tvOS:
-            return { .platform = PLATFORM_TVOS,     .version = foundEntry->tvos };
-        case dyld3::Platform::bridgeOS:
-            return { .platform = PLATFORM_BRIDGEOS, .version = foundEntry->bridgeos };
-        default:
-            return { .platform = (dyld_platform_t)MachOFile::basePlatform(config.process.platform), .version = 0 };
-    }
+//    }
+//    switch ( MachOFile::basePlatform(config.process.platform) ) {
+//        case dyld3::Platform::macOS:
+//            return { .platform = PLATFORM_MACOS,    .version = foundEntry->macos };
+//        case dyld3::Platform::iOS:
+//            return { .platform = PLATFORM_IOS,      .version = foundEntry->ios };
+//        case dyld3::Platform::watchOS:
+//            return { .platform = PLATFORM_WATCHOS,  .version = foundEntry->watchos };
+//        case dyld3::Platform::tvOS:
+//            return { .platform = PLATFORM_TVOS,     .version = foundEntry->tvos };
+//        case dyld3::Platform::bridgeOS:
+//            return { .platform = PLATFORM_BRIDGEOS, .version = foundEntry->bridgeos };
+//        default:
+//            return { .platform = (dyld_platform_t)MachOFile::basePlatform(config.process.platform), .version = 0 };
+//    }
 #endif
 }
 

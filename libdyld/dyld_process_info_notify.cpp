@@ -30,7 +30,7 @@
 #include <limits.h>
 #include <stdio.h>
 #include <mach/shared_region.h>
-#include <mach/mach_vm.h>
+//#include <mach/mach_vm.h>
 #include <libkern/OSAtomic.h>
 #include <execinfo.h>
 #include <mach-o/dyld_priv.h>

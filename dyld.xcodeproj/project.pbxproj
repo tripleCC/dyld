@@ -3861,7 +3861,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${SRCROOT}/build-scripts/prebuilt-loader-hash.sh\n";
+			shellScript = "#${SRCROOT}/build-scripts/prebuilt-loader-hash.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F960CE55254121350044A147 /* make PrebuiltLoader version */ = {
@@ -6761,6 +6761,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F98B359F24ED748E00DE738B /* dyld.xcconfig */;
 			buildSettings = {
+				ARCHS = arm64;
 				CODE_SIGN_IDENTITY = "-";
 				CURRENT_PROJECT_VERSION = "$(RC_ProjectSourceVersion)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -6772,10 +6773,29 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ALLOW_INCOMPLETE_PROTOCOL = NO;
+				HEADER_SEARCH_PATHS = (
+					./include,
+					../libplatform/private/,
+					../Libc/darwin/,
+					../corecrypto/ccdigest/,
+					../corecrypto/cc/,
+					../corecrypto/ccn/,
+					../corecrypto/ccsha1/,
+					../corecrypto/ccsha2/,
+					../xnu/libsyscall/wrappers/libproc/,
+					../xnu/bsd/,
+					../xnu/osfmk/,
+					../libkern/,
+					../xnu/libkern/,
+					../launchd/liblaunch/,
+					../Libc/stdlib/FreeBSD,
+				);
 				LD_GENERATE_MAP_FILE = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				SUPPORTED_PLATFORMS = "macosx iphoneos xros watchos appletvos bridgeos watchsimulator iphonesimulator xrsimulator appletvsimulator exclavekit.macosx exclavekit.iphoneos exclavekit.appletvos";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				UNSTRIPPED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = (
 					./dyld,
@@ -6791,6 +6811,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F98B359F24ED748E00DE738B /* dyld.xcconfig */;
 			buildSettings = {
+				ARCHS = arm64;
 				CODE_SIGN_IDENTITY = "-";
 				CURRENT_PROJECT_VERSION = "$(RC_ProjectSourceVersion)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -6801,9 +6822,28 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					./include,
+					../libplatform/private/,
+					../Libc/darwin/,
+					../corecrypto/ccdigest/,
+					../corecrypto/cc/,
+					../corecrypto/ccn/,
+					../corecrypto/ccsha1/,
+					../corecrypto/ccsha2/,
+					../xnu/libsyscall/wrappers/libproc/,
+					../xnu/bsd/,
+					../xnu/osfmk/,
+					../libkern/,
+					../xnu/libkern/,
+					../launchd/liblaunch/,
+					../Libc/stdlib/FreeBSD,
+				);
 				LD_GENERATE_MAP_FILE = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				SUPPORTED_PLATFORMS = "macosx iphoneos xros watchos appletvos bridgeos watchsimulator iphonesimulator xrsimulator appletvsimulator exclavekit.macosx exclavekit.iphoneos exclavekit.appletvos";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				UNSTRIPPED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = (
 					./dyld,
@@ -6865,6 +6905,7 @@
 		F9D8C7EA087B087300E93EFB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -6903,11 +6944,14 @@
 				);
 				IS_ZIPPERED = "";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx.internal;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = (
 					./dyld,
 					./common,
+					../libplatform/private/,
+					../Libc/darwin/,
 				);
 				WARNING_CFLAGS = "";
 			};
@@ -6916,6 +6960,7 @@
 		F9D8C7EC087B087300E93EFB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
 				CLANG_CXX_LIBRARY = "compiler-default";
@@ -6954,11 +6999,14 @@
 					./ld,
 				);
 				IS_ZIPPERED = "";
-				SDKROOT = macosx.internal;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = (
 					./dyld,
 					./common,
+					../libplatform/private/,
+					../Libc/darwin/,
 				);
 				WARNING_CFLAGS = "";
 			};

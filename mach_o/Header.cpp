@@ -625,10 +625,11 @@ Error Header::validSemanticsDependents(const Policy& policy) const
                 const char* libSystemDir = "/System/DriverKit/usr/lib/system/";
                 if ( strncmp(installName, libSystemDir, strlen(libSystemDir)) != 0 )
                     isLibSystem = true;
-            } else if ( this->platformAndVersions().platform.isExclaveKit() ) {
-                const char* libSystemDir = "/System/ExclaveKit/usr/lib/system/";
-                if ( strncmp(installName, libSystemDir, strlen(libSystemDir)) != 0 )
-                    isLibSystem = true;
+                // TRIPLECC TODO
+//            } else if ( this->platformAndVersions().platform.isExclaveKit() ) {
+//                const char* libSystemDir = "/System/ExclaveKit/usr/lib/system/";
+//                if ( strncmp(installName, libSystemDir, strlen(libSystemDir)) != 0 )
+//                    isLibSystem = true;
             } else {
                 const char* libSystemDir = "/usr/lib/system/";
                 if ( strncmp(installName, libSystemDir, strlen(libSystemDir)) != 0 )
@@ -1221,9 +1222,10 @@ void Header::forEachDependentDylib(void (^callback)(const char* loadPath, Depend
         if ( this->builtForPlatform(Platform::driverKit, true) ) {
             if ( !this->isDylib() || (strncmp(this->installName(), "/System/DriverKit/usr/lib/system/", 33) != 0) )
                 callback("/System/DriverKit/usr/lib/libSystem.B.dylib", DependentDylibAttributes::regular, Version32(1, 0), Version32(1, 0), stopped);
-        } else if ( this->platformAndVersions().platform.isExclaveKit() ) {
-            if ( !this->isDylib() || (strncmp(this->installName(), "/System/ExclaveKit/usr/lib/system/", 34) != 0) )
-                callback("/System/ExclaveKit/usr/lib/libSystem.dylib", DependentDylibAttributes::regular, Version32(1, 0), Version32(1, 0), stopped);
+            // TRIPLECC TODO
+//        } else if ( this->platformAndVersions().platform.isExclaveKit() ) {
+//            if ( !this->isDylib() || (strncmp(this->installName(), "/System/ExclaveKit/usr/lib/system/", 34) != 0) )
+//                callback("/System/ExclaveKit/usr/lib/libSystem.dylib", DependentDylibAttributes::regular, Version32(1, 0), Version32(1, 0), stopped);
         }
         else {
             if ( !this->isDylib() || (strncmp(this->installName(), "/usr/lib/system/", 16) != 0) )

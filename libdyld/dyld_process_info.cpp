@@ -33,7 +33,7 @@
 #include <libproc.h>
 #include <sys/param.h>
 #include <mach/shared_region.h>
-#include <mach/mach_vm.h>
+//#include <mach/mach_vm.h>
 #include <mach/vm_region.h>
 #include <libkern/OSAtomic.h>
 #include <mach-o/dyld_process_info.h>

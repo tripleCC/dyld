@@ -31,7 +31,7 @@
 #if !TARGET_OS_EXCLAVEKIT
   #include <sys/mman.h>
   #include <mach/mach.h>
-  #include <mach/mach_vm.h>
+//  #include <mach/mach_vm.h>
   #include <malloc/malloc.h>
 #endif //  !TARGET_OS_EXCLAVEKIT
 #include <sanitizer/asan_interface.h>

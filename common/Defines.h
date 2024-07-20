@@ -119,8 +119,8 @@
 #define SUPPORT_CLASSIC_RELOCS (!TARGET_OS_EXCLAVEKIT && (!BUILDING_DYLD || TARGET_OS_OSX) )
 
 #if !TARGET_OS_DRIVERKIT && !TARGET_OS_EXCLAVEKIT && (BUILDING_LIBDYLD || BUILDING_DYLD || BUILDING_SHARED_CACHE_EXTRACTOR || BUILDING_SHARED_CACHE_UTIL || BUILDING_LIBDSC || BUILDING_LD)
-  #include <CrashReporterClient.h>
-#else
+//  #include <CrashReporterClient.h>
+//#else
   #define CRSetCrashLogMessage(x)
   #define CRSetCrashLogMessage2(x)
 #endif

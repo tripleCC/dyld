@@ -35,6 +35,8 @@
 __BEGIN_DECLS
 extern int amfi_check_dyld_policy_self(uint64_t input_flags, uint64_t* output_flags);
 extern kern_return_t task_dyld_process_info_notify_get(mach_port_name_array_t names_addr, natural_t *names_count_addr);
+
+void mach_msg_destroy(mach_msg_header_t *msg);
 __END_DECLS
 #endif
 
@@ -52,7 +54,7 @@ __END_DECLS
 #include <sys/stat.h>
 #include <sys/fsgetpath.h>
 #include <unistd.h>
-#include <System/sys/reason.h>
+#include <sys/reason.h>
 
 struct dyld_all_image_infos;
 

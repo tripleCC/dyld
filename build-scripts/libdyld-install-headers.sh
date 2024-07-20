@@ -12,7 +12,7 @@ dlfcnUnifdef()
     fi
 }
 
-PLATFORM_SDK="macosx.internal"
+PLATFORM_SDK="macosx"
 
 # Check that a header can be parsed as C, not C++
 checkHeader()

@@ -32,13 +32,13 @@
   #include <sys/stat.h>
   #include <sys/types.h>
   #include <sys/mman.h>
-  #include <System/sys/reason.h>
+  #include <sys/reason.h>
   #include <kern/kcdata.h>
   #include <libkern/OSAtomic.h>
   #include <_simple.h>
   // atexit header is missing C++ guards
   extern "C" {
-    #include <System/atexit.h>
+    #include <atexit.h>
   }
 #endif
 #include <mach-o/dyld_priv.h>

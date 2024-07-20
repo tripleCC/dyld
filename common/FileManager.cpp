@@ -33,7 +33,18 @@
 #include <sys/param.h>
 #include <sys/ucred.h>
 #include <sys/mount.h>
-#include <System/sys/fsgetpath.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <sys/fsgetpath.h>
+
+int openbyid_np(fsid_t* fsid, fsobj_id_t* objid, int flags);
+
+#ifdef __cplusplus
+}
+#endif
 
 #include "FileManager.h"
 

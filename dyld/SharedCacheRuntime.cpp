@@ -50,7 +50,7 @@
 #include <optional>
 #include <Availability.h>
 #include <TargetConditionals.h>
-#include <System/mach/dyld_pager.h>
+#include <mach/dyld_pager.h>
 
 #include "Defines.h"
 #include "dyld_cache_format.h"

@@ -35,7 +35,7 @@
     #include <sys/uio.h>
     #include <sys/un.h>
     #if __arm64__ || __arm__
-        #include <System/sys/mman.h>
+        #include <sys/mman.h>
     #else
         #include <sys/mman.h>
     #endif
@@ -47,14 +47,14 @@
     #include <sys/param.h>
     #include <sys/mount.h>
     #include <dirent.h>
-    #include <System/sys/csr.h>
-    #include <System/sys/reason.h>
+    #include <sys/csr.h>
+    #include <sys/reason.h>
     #include <kern/kcdata.h>
-    //FIXME: Hack to avoid <sys/commpage.h> being included by <System/machine/cpu_capabilities.h>
-    #include <System/sys/commpage.h>
-    #include <System/machine/cpu_capabilities.h>
-    #include <System/sys/content_protection.h>
-    #include <sandbox/private.h>
+    //FIXME: Hack to avoid <sys/commpage.h> being included by <machine/cpu_capabilities.h>
+    #include <sys/commpage.h>
+    #include <machine/cpu_capabilities.h>
+    #include <sys/content_protection.h>
+//    #include <sandbox/private.h>
     #include <sys/syscall.h>
     #include <sys/attr.h>
     #include <sys/vnode.h>
@@ -65,8 +65,8 @@
     extern "C" ssize_t __sendto(int, const void*, size_t, int, const struct sockaddr*, socklen_t);
     #include "DyldProcessConfig.h"
 #endif
-#if __has_include(<System/mach/dyld_pager.h>)
-    #include <System/mach/dyld_pager.h>
+#if __has_include(<mach/dyld_pager.h>)
+    #include <mach/dyld_pager.h>
 #endif
 #ifndef DYLD_VM_END_MWL
     #define DYLD_VM_END_MWL (-1ull)
@@ -801,11 +801,11 @@ bool SyscallDelegate::saveFileWithAttribute(Diagnostics& diag, const char* path,
     putHexByte(mypid & 0xFF, s);
     *s = '\0';
     ::strlcat(tempPath, pidBuf, PATH_MAX);
-#if TARGET_OS_OSX
+//#if TARGET_OS_OSX
     int fd = dyld3::open(tempPath, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
-#else
-    int fd = ::open_dprotected_np(tempPath, O_WRONLY | O_CREAT, PROTECTION_CLASS_D, 0, S_IRUSR | S_IWUSR);
-#endif
+//#else
+//    int fd = ::open_dprotected_np(tempPath, O_WRONLY | O_CREAT, PROTECTION_CLASS_D, 0, S_IRUSR | S_IWUSR);
+//#endif
     if ( fd == -1 ) {
         diag.error("open/open_dprotected_np(%s) failed, errno=%d", tempPath, errno);
         return false;
@@ -943,11 +943,12 @@ SyscallDelegate::DyldCommPage::DyldCommPage()
 
 SyscallDelegate::DyldCommPage SyscallDelegate::dyldCommPageFlags() const
 {
-#if BUILDING_DYLD
-    return *((DyldCommPage*)_COMM_PAGE_DYLD_FLAGS);
-#else
-    return _commPageFlags;
-#endif
+    return {};
+//#if BUILDING_DYLD
+//    return *((DyldCommPage*)_COMM_PAGE_DYLD_FLAGS);
+//#else
+//    return _commPageFlags;
+//#endif
 }
 
 void SyscallDelegate::setDyldCommPageFlags(DyldCommPage value) const

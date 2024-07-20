@@ -46,11 +46,11 @@
   #include <_simple.h>
   #include <os/lock_private.h>
   #include <Availability.h>
-  #include <System/sys/codesign.h>
-  #include <System/sys/csr.h>
-  #include <System/sys/reason.h>
-  #include <System/machine/cpu_capabilities.h>
-  #include <CrashReporterClient.h>
+  #include <sys/codesign.h>
+  #include <sys/csr.h>
+  #include <sys/reason.h>
+  #include <machine/cpu_capabilities.h>
+//  #include <CrashReporterClient.h>
   #include <libproc_internal.h>
   #if !TARGET_OS_SIMULATOR
     #include <libamfi.h>

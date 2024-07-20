@@ -504,8 +504,8 @@ const MachOFile::PlatformInfo MachOFile::_s_platformInfos[] = {
     { "tvOS-sim",           Platform::tvOS_simulator,       LC_BUILD_VERSION        },
     { "watchOS-sim",        Platform::watchOS_simulator,    LC_BUILD_VERSION        },
     { "driverKit",          Platform::driverKit,            LC_BUILD_VERSION        },
-    { "xrOS",               Platform::xrOS,                 LC_BUILD_VERSION        },
-    { "xrOS-sim",           Platform::xrOS_simulator,       LC_BUILD_VERSION        },
+//    { "xrOS",               Platform::xrOS,                 LC_BUILD_VERSION        },
+//    { "xrOS-sim",           Platform::xrOS_simulator,       LC_BUILD_VERSION        },
 };
 
 
@@ -792,22 +792,23 @@ const char* MachOFile::currentArchName()
 
 bool MachOFile::isExclaveKitPlatform(Platform platform, Platform* basePlatform)
 {
-    switch ( platform ) {
-        case Platform::macOSExclaveKit:
-            if ( basePlatform )
-                *basePlatform = Platform::macOS;
-            return true;
-        case Platform::iOSExclaveKit:
-            if ( basePlatform )
+    // TRIPLECC TODO
+//    switch ( platform ) {
+//        case Platform::macOSExclaveKit:
+//            if ( basePlatform )
+//                *basePlatform = Platform::macOS;
+//            return true;
+//        case Platform::iOSExclaveKit:
+//            if ( basePlatform )
                 *basePlatform = Platform::iOS;
             return true;
-        case Platform::tvOSExclaveKit:
-            if ( basePlatform )
-                *basePlatform = Platform::tvOS;
-            return true;
-       default:
-            return false;
-    }
+//        case Platform::tvOSExclaveKit:
+//            if ( basePlatform )
+//                *basePlatform = Platform::tvOS;
+//            return true;
+//       default:
+//            return false;
+//    }
 }
 
 bool MachOFile::isSimulatorPlatform(Platform platform, Platform* basePlatform)

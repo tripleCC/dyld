@@ -3,7 +3,7 @@ set -e
 
 echo -e "#include \"PrebuiltLoader.h\"\nint foo() { return sizeof(dyld4::PrebuiltLoader)+sizeof(mach_o::DependentDylibAttributes)+sizeof(dyld4::PrebuiltLoaderSet)+sizeof(dyld4::ObjCBinaryInfo)+sizeof(dyld4::Loader::DylibPatch)+sizeof(dyld4::Loader::FileValidationInfo); }\n" > ${DERIVED_FILE_DIR}/test.cpp
 
-PLATFORM_SDK="macosx.internal"
+PLATFORM_SDK="macosx"
 
 xcrun -sdk ${PLATFORM_SDK} clang++ -arch arm64 -std=c++2a -w -Wno-incompatible-sysroot -fsyntax-only -Xclang -fdump-record-layouts -Icommon -Idyld -Iinclude -Icache-builder -Icache_builder -Ilsl -Imach_o -Iinclude/mach-o ${DERIVED_FILE_DIR}/test.cpp > ${DERIVED_FILE_DIR}/test.out
 
