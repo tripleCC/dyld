@@ -26,7 +26,7 @@ GCC_PREPROCESSOR_DEFINITIONS[sdk=exclavekit*] = $(GCC_PREPROCESSOR_DEFINITIONS_$
 LINK_WITH_STANDARD_LIBRARIES[sdk=exclavekit*] = NO
 
 SYSTEM_HEADER_SEARCH_PATHS[sdk=exclavekit*] = $(SDKROOT)$(SYSTEM_PREFIX)/usr/include/c++/v1 $(SDKROOT)$(SYSTEM_PREFIX)/usr/local/standalone/cL4/include
-OTHER_CFLAGS[sdk=exclavekit*] = -nostdlibinc -idirafter $(SDKROOT)$(SYSTEM_PREFIX)/usr/local/include/dyld -idirafter $(SDKROOT)$(SYSTEM_PREFIX)/usr/include
+OTHER_CFLAGS[sdk=exclavekit*] = -idirafter $(SDKROOT)$(SYSTEM_PREFIX)/usr/local/include/dyld -idirafter $(SDKROOT)$(SYSTEM_PREFIX)/usr/include
 
 ENTRY_NAME[sdk=*simulator*] = __dyld_sim_prepare
 ENTRY_NAME[sdk=iphoneos*]   = __dyld_start
@@ -38,4 +38,4 @@ DIRTY                    = -Wl,-dirty_data_list,$(DERIVED_SOURCES_DIR)/dyld.dirt
 LLDB_SUPPORT = -Wl,-exported_symbol,_lldb_image_notifier -Wl,-exported_symbol,__dyld_debugger_notification  -Wl,-exported_symbol,_dyld_all_image_infos
 LLDB_SUPPORT[sdk=*simulator*] =
 
-OTHER_LDFLAGS = -e $(ENTRY_NAME) -Wl,-exported_symbol,$(ENTRY_NAME) $(LLDB_SUPPORT) -Wl,-no_inits @$(DERIVED_SOURCES_DIR)/archives.txt -nostdlib -Wl,-dylinker -Wl,-dylinker_install_name,/usr/lib/dyld $(ALIGNMENT) -Wl,-fixup_chains -Wl,-data_const -fapple-link-rtlib $(DIRTY)
+OTHER_LDFLAGS = -e $(ENTRY_NAME) -Wl,-exported_symbol,$(ENTRY_NAME) $(LLDB_SUPPORT) -Wl,-no_inits @$(DERIVED_SOURCES_DIR)/archives.txt -Wl,-dylinker -Wl,-dylinker_install_name,/usr/lib/dyld $(ALIGNMENT) -Wl,-fixup_chains -Wl,-data_const -fapple-link-rtlib $(DIRTY)

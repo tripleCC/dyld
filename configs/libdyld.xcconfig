@@ -23,8 +23,8 @@ SYSTEM_HEADER_SEARCH_PATHS                  =
 SYSTEM_HEADER_SEARCH_PATHS[sdk=exclavekit*] = $(SDKROOT)$(SYSTEM_PREFIX)/usr/local/standalone/cL4/include
 
 // FIXME: -Wl,-unexported_symbol is a hack to deal with C++20 comparison visbility, we can probably fix it better
-OTHER_LDFLAGS = -Wl,-no_inits -nostdlib -lCrashReporterClient $(LIBSYSTEM_LIBS) -umbrella System -L$(SDKROOT)/$(DRIVERKITROOT)/usr/lib/system $(EXTRA_SECTIONS) -Wl,-unexported_symbol,__ZNSt3*
-OTHER_LDFLAGS[sdk=exclavekit*] = -Wl,-no_inits -nostdlib $(LIBSYSTEM_LIBS) -umbrella System -L$(SDKROOT)/$(SYSTEM_PREFIX)/usr/lib/system $(EXTRA_SECTIONS) -Wl,-unexported_symbol,__ZNSt3__115strong_ordering*
+OTHER_LDFLAGS = -Wl,-no_inits -lCrashReporterClient $(LIBSYSTEM_LIBS) -umbrella System -L$(SDKROOT)/$(DRIVERKITROOT)/usr/lib/system $(EXTRA_SECTIONS) -Wl,-unexported_symbol,__ZNSt3*
+OTHER_LDFLAGS[sdk=exclavekit*] = -Wl,-no_inits $(LIBSYSTEM_LIBS) -umbrella System -L$(SDKROOT)/$(SYSTEM_PREFIX)/usr/lib/system $(EXTRA_SECTIONS) -Wl,-unexported_symbol,__ZNSt3__115strong_ordering*
 
 PRIVATE_TAPI_FLAGS                  = -extra-private-header ${SRCROOT}/include/mach-o/dyld_priv.h -extra-private-header ./include/mach-o/dyld_introspection.h -extra-private-header ./include/mach-o/dyld_process_info.h  -extra-private-header ./include/mach-o/utils_priv.h
 PRIVATE_TAPI_FLAGS[sdk=*simulator*] = -extra-private-header ./include/dlfcn_private.h -extra-private-header ${SRCROOT}/include/mach-o/dyld_priv.h -extra-private-header ./include/mach-o/dyld_process_info.h -extra-private-header ./include/mach-o/dyld_introspection.h  -extra-private-header ./include/mach-o/utils_priv.h
