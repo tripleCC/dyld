@@ -53,7 +53,7 @@
 //  #include <CrashReporterClient.h>
   #include <libproc_internal.h>
   #if !TARGET_OS_SIMULATOR
-    #include <libamfi.h>
+//    #include <libamfi.h>
   #endif // !TARGET_OS_SIMULATOR
 #endif // !TARGET_OS_EXCLAVEKIT
 #if __has_feature(ptrauth_calls)

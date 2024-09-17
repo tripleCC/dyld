@@ -75,13 +75,13 @@ bool FileSystemPhysical::getRealPath(const char possiblePath[MAXPATHLEN], char r
 
 static bool sandboxBlocked(const char* path, const char* kind)
 {
-#if TARGET_OS_SIMULATOR || TARGET_OS_DRIVERKIT
+//#if TARGET_OS_SIMULATOR || TARGET_OS_DRIVERKIT
     // sandbox calls not yet supported in dyld_sim
     return false;
-#else
-    sandbox_filter_type filter = (sandbox_filter_type)(SANDBOX_FILTER_PATH | SANDBOX_CHECK_NO_REPORT);
-    return ( sandbox_check(getpid(), kind, filter, path) > 0 );
-#endif
+//#else
+//    sandbox_filter_type filter = (sandbox_filter_type)(SANDBOX_FILTER_PATH | SANDBOX_CHECK_NO_REPORT);
+//    return ( sandbox_check(getpid(), kind, filter, path) > 0 );
+//#endif
 }
 
 static bool sandboxBlockedMmap(const char* path)

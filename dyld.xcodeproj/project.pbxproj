@@ -6762,7 +6762,7 @@
 			baseConfigurationReference = F98B359F24ED748E00DE738B /* dyld.xcconfig */;
 			buildSettings = {
 				ARCHS = arm64;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development: Qiushi Xue (3YX8P684C5)";
 				CURRENT_PROJECT_VERSION = "$(RC_ProjectSourceVersion)";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6790,10 +6790,11 @@
 					../launchd/liblaunch/,
 					../Libc/stdlib/FreeBSD,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_GENERATE_MAP_FILE = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				UNSTRIPPED_PRODUCT = NO;
@@ -6812,7 +6813,7 @@
 			baseConfigurationReference = F98B359F24ED748E00DE738B /* dyld.xcconfig */;
 			buildSettings = {
 				ARCHS = arm64;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development: Qiushi Xue (3YX8P684C5)";
 				CURRENT_PROJECT_VERSION = "$(RC_ProjectSourceVersion)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6839,9 +6840,10 @@
 					../launchd/liblaunch/,
 					../Libc/stdlib/FreeBSD,
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_GENERATE_MAP_FILE = YES;
 				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYSTEM_FRAMEWORK_SEARCH_PATHS = "";
 				UNSTRIPPED_PRODUCT = NO;
@@ -6944,7 +6946,7 @@
 				);
 				IS_ZIPPERED = "";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = (
@@ -6999,7 +7001,7 @@
 					./ld,
 				);
 				IS_ZIPPERED = "";
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				USER_HEADER_SEARCH_PATHS = (

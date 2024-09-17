@@ -101,7 +101,7 @@ void RemoteNotificationResponder::sendMessage(mach_msg_id_t msgId, mach_msg_size
                                  (mach_msg_header_t*)&replyBuffer[0], 0);
         if (kr != KERN_SUCCESS) {
             // Send failed, we may have been psuedo recieved. destroy the message
-            (void)mach_msg_destroy(msg);
+//            (void)mach_msg_destroy(msg);
             // Mark the port as null. It does not matter why we failed... if it is s single message we will not retry, if it
             // is a fragmented message then subsequent messages will not decode correctly
             _names[i] = MACH_PORT_NULL;

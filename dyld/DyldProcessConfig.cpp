@@ -53,7 +53,7 @@
 
 #if !TARGET_OS_EXCLAVEKIT
 #if  BUILDING_DYLD && !TARGET_OS_SIMULATOR
-    #include <libamfi.h>
+//    #include <libamfi.h>
 #else
 enum
 {

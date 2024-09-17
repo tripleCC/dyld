@@ -51,7 +51,7 @@
 #if BUILDING_CACHE_BUILDER_UNIT_TESTS
 #define PREBUILTLOADER_VERSION 0x0
 #else
-#include "PrebuiltLoader_version.h"
+//#include "PrebuiltLoader_version.h"
 #endif
 
 
@@ -1564,13 +1564,13 @@ bool PrebuiltLoaderSet::validHeader(RuntimeState& state) const
             console("not using PrebuiltLoaderSet %p because magic at start does not match\n", this);
         return false;
     }
-    if ( this->versionHash != PREBUILTLOADER_VERSION ) {
-        if ( state.config.log.loaders ) {
-            console("not using PrebuiltLoaderSet %p because versionHash (0x%08X) does not match dyld (0x%08X)\n",
-                        this, this->versionHash, PREBUILTLOADER_VERSION);
-        }
-        return false;
-    }
+//    if ( this->versionHash != PREBUILTLOADER_VERSION ) {
+//        if ( state.config.log.loaders ) {
+//            console("not using PrebuiltLoaderSet %p because versionHash (0x%08X) does not match dyld (0x%08X)\n",
+//                        this, this->versionHash, PREBUILTLOADER_VERSION);
+//        }
+//        return false;
+//    }
     return true;
 }
 
@@ -2142,7 +2142,7 @@ const PrebuiltLoaderSet* PrebuiltLoaderSet::makeLaunchSet(Diagnostics& diag, Run
     allocator.zeroFill(sizeof(PrebuiltLoaderSet));
     BumpAllocatorPtr<PrebuiltLoaderSet> set(allocator, 0);
     set->magic               = kMagic;
-    set->versionHash         = PREBUILTLOADER_VERSION;
+//    set->versionHash         = PREBUILTLOADER_VERSION;
     set->loadersArrayCount   = (uint32_t)count;
     set->loadersArrayOffset  = sizeof(PrebuiltLoaderSet);
     set->cachePatchCount     = 0;

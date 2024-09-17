@@ -77,7 +77,7 @@ extern "C" int __shared_region_check_np(uint64_t* startaddress);
 
 #if !TARGET_OS_EXCLAVEKIT
 #if BUILDING_DYLD && !TARGET_OS_SIMULATOR
-    #include <libamfi.h>
+//    #include <libamfi.h>
 #else
 enum
 {
@@ -140,15 +140,15 @@ uint64_t SyscallDelegate::amfiFlags(bool restricted, bool fairPlayEncryted) cons
     #if TARGET_OS_SIMULATOR
     amfiInputFlags |= AMFI_DYLD_INPUT_PROC_IN_SIMULATOR;
     #else
-    if ( restricted )
-        amfiInputFlags |= AMFI_DYLD_INPUT_PROC_HAS_RESTRICT_SEG;
-    if ( fairPlayEncryted )
-        amfiInputFlags |= AMFI_DYLD_INPUT_PROC_IS_ENCRYPTED;
+//    if ( restricted )
+//        amfiInputFlags |= AMFI_DYLD_INPUT_PROC_HAS_RESTRICT_SEG;
+//    if ( fairPlayEncryted )
+//        amfiInputFlags |= AMFI_DYLD_INPUT_PROC_IS_ENCRYPTED;
     #endif
 
-    if ( amfi_check_dyld_policy_self(amfiInputFlags, &amfiOutputFlags) != 0 ) {
-        amfiOutputFlags = 0;
-    }
+//    if ( amfi_check_dyld_policy_self(amfiInputFlags, &amfiOutputFlags) != 0 ) {
+//        amfiOutputFlags = 0;
+//    }
     return amfiOutputFlags;
 #else
     return _amfiFlags;
@@ -160,8 +160,9 @@ bool SyscallDelegate::internalInstall() const
 #if TARGET_OS_SIMULATOR
     return false;
 #elif BUILDING_DYLD && TARGET_OS_IPHONE
-    uint32_t devFlags = *((uint32_t*)_COMM_PAGE_DEV_FIRM);
-    return ((devFlags & 1) == 1);
+//    uint32_t devFlags = *((uint32_t*)_COMM_PAGE_DEV_FIRM);
+//    return ((devFlags & 1) == 1);
+    return false;
 #elif BUILDING_DYLD && TARGET_OS_OSX
     return (::csr_check(CSR_ALLOW_APPLE_INTERNAL) == 0);
 #else
@@ -238,12 +239,12 @@ bool SyscallDelegate::onHaswell() const
 
 bool SyscallDelegate::dtraceUserProbesEnabled() const
 {
-#if BUILDING_DYLD && !TARGET_OS_SIMULATOR
-    uint8_t dofEnabled = *((uint8_t*)_COMM_PAGE_DTRACE_DOF_ENABLED);
-    return ( (dofEnabled & 1) );
-#else
+//#if BUILDING_DYLD && !TARGET_OS_SIMULATOR
+//    uint8_t dofEnabled = *((uint8_t*)_COMM_PAGE_DTRACE_DOF_ENABLED);
+//    return ( (dofEnabled & 1) );
+//#else
     return false;
-#endif
+//#endif
 }
 
 void SyscallDelegate::dtraceRegisterUserProbes(dof_ioctl_data_t* probes) const
@@ -898,12 +899,12 @@ int SyscallDelegate::getpid() const
 
 bool SyscallDelegate::sandboxBlocked(const char* path, const char* kind) const
 {
-#if BUILDING_DYLD && !TARGET_OS_SIMULATOR && !TARGET_OS_DRIVERKIT
-    sandbox_filter_type filter = (sandbox_filter_type)(SANDBOX_FILTER_PATH | SANDBOX_CHECK_NO_REPORT);
-    return ( sandbox_check(this->getpid(), kind, filter, path) > 0 );
-#else
+//#if BUILDING_DYLD && !TARGET_OS_SIMULATOR && !TARGET_OS_DRIVERKIT
+//    sandbox_filter_type filter = (sandbox_filter_type)(SANDBOX_FILTER_PATH | SANDBOX_CHECK_NO_REPORT);
+//    return ( sandbox_check(this->getpid(), kind, filter, path) > 0 );
+//#else
     return false;
-#endif
+//#endif
 }
 
 bool SyscallDelegate::sandboxBlockedMmap(const char* path) const
@@ -923,12 +924,12 @@ bool SyscallDelegate::sandboxBlockedStat(const char* path) const
 
 bool SyscallDelegate::sandboxBlockedSyscall(int syscallNum) const
 {
-#if BUILDING_DYLD && !TARGET_OS_SIMULATOR && !TARGET_OS_DRIVERKIT
-    sandbox_filter_type filter = (sandbox_filter_type)(SANDBOX_FILTER_SYSCALL_NUMBER | SANDBOX_CHECK_NO_REPORT);
-    return (sandbox_check(this->getpid(), "syscall-unix", filter, syscallNum) > 0);
-#else
+//#if BUILDING_DYLD && !TARGET_OS_SIMULATOR && !TARGET_OS_DRIVERKIT
+//    sandbox_filter_type filter = (sandbox_filter_type)(SANDBOX_FILTER_SYSCALL_NUMBER | SANDBOX_CHECK_NO_REPORT);
+//    return (sandbox_check(this->getpid(), "syscall-unix", filter, syscallNum) > 0);
+//#else
     return false;
-#endif
+//#endif
 }
 
 bool SyscallDelegate::sandboxBlockedPageInLinking() const
@@ -1168,7 +1169,8 @@ kern_return_t SyscallDelegate::vm_protect(task_port_t task, vm_address_t addr, v
 int SyscallDelegate::mremap_encrypted(void* p, size_t len, uint32_t id, uint32_t cpuType, uint32_t cpuSubtype) const
 {
 #if BUILDING_DYLD && !TARGET_OS_SIMULATOR && (__arm64__ || __arm__)
-    return ::mremap_encrypted(p, len, id, cpuType, cpuSubtype);
+//    return ::mremap_encrypted(p, len, id, cpuType, cpuSubtype);
+    return 0;
 #else
     abort();
     // FIXME
